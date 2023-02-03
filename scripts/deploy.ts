@@ -1,18 +1,35 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  
+  // ********Deploying FoswapVaultBridgeFVM to FVM blockchain***********
+  console.log("Deploying FooswapVaultBridgeFVM to the FVM blockchai")
+  const FooswapVaultBridgeFVM = await ethers.getContractFactory("FooswapVaultBridgeFVM")
+  const fooswapVaultBridgeFVM = await FooswapVaultBridgeFVM.deploy()
+  await fooswapVaultBridgeFVM.deployed();
 
-  const lockedAmount = ethers.utils.parseEther("1");
+  console.log(`FooswapVaultBridgeFVM has been deployed to  ${fooswapVaultBridgeFVM.address}`);
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
-  await lock.deployed();
+  // ********Deploying FooswapVaultBridgeBSC to the BSC blockchain***********
+  console.log("Deploying FooswapVaultBridgeBSC to the BSC blockchain")
+  const FooswapVaultBridgeBSC = await ethers.getContractFactory("FooswapVaultBridgeBSC")
+  const fooswapVaultBridgeBSC = await FooswapVaultBridgeBSC.deploy()
+  await fooswapVaultBridgeBSC.deployed()
 
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  console.log("FooswapVaultBridgeBSC has been deployed to ", fooswapVaultBridgeBSC.address)
+
+
+  // ********Deploying Token to the BSC blockchain***********
+
+  console.log("Deploying FILEcoin to the BSC blockchain")
+
+  const FILEcoin = await ethers.getContractFactory("FIL") 
+  const filecoin = await FILEcoin.deploy()
+  await filecoin.deployed()
+
+  console.log("FILEcoin has been deployed to", filecoin.address)
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
