@@ -1,0 +1,22 @@
+const { expect } = require("chai");
+
+describe("MyContract", async () => {
+  let contract;
+
+  before(async () => {
+    contract = await ethers.getContractAt("MyContract", MyContract.address);
+  });
+
+  it("has the correct size", async () => {
+    const bytecode = await contract.deployedBytecode();
+    const size = bytecode.length / 2; // divide by 2 to convert from hex to bytes
+    expect(size).to.be.below(300000);
+  });
+
+
+  it("has the correct size", async () => {
+    const bytecode = MyContract.evm.bytecode.object;
+    const size = bytecode.length / 2; // divide by 2 to convert from hex to bytes
+    expect(size).to.be.below(300000);
+  });
+});

@@ -10,7 +10,6 @@ import {SafeERC20} from "./providers/safeERC20.provider.sol";
 
 /// @notice this is FOO swap bridge conract
 /// @dev this contract would be deployed on the chains that the bridge is going to be working on
-/// @author aagbotemi
 /// @author Adebara123 
 contract FooswapVaultBridgeBSC {
     // ===========================
